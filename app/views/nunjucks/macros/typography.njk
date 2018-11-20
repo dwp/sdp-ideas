@@ -1,0 +1,16 @@
+{% macro heading(content, size, type) %}
+    <h{{ size }} {% if type %}class="govuk-heading-{{ type }}"{% endif %}>{{ content }}</h{{ size }}>
+{% endmacro %}
+
+{% macro captionedHeading(captionContent, content, size, type) %}
+    <span class="govuk-caption-{{ type }}">{{ captionContent }}</span>
+    <h{{ size }} {% if type %}class="govuk-heading-{{ type }}"{% endif %}>{{ content }}</h{{ size }}>
+{% endmacro %}
+
+{% macro lede(content) %}
+    <p class="govuk-body-l">{{ content }}</p>
+{% endmacro %}
+
+{% macro paragraph(content) %}
+    <p class="govuk-body">{{ content }}</p>
+{% endmacro %}

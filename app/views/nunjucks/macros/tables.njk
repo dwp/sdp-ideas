@@ -1,0 +1,29 @@
+{% macro horizontalTable(head, body) %}
+    <table class="govuk-table">
+        {% if head %}
+            <thead>
+                <tr>
+                    {% for item in head %}
+                        {% if loop.index === 0 %}
+                            <td class="govuk-table__header">{{ item }}</td>
+                        {% else %}
+                            <td class="govuk-table__cell">{{ item }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </thead>
+        {% endif %}
+        <tbody class="govuk-table__body">
+            {% for item in body %}
+                <tr class="govuk-table__row">
+                    {% if item.heading %}
+                        <td class="govuk-table__header">NINO</td>
+                    {% endif %}
+                    {% for cell in item.cells %}
+                        <td class="govuk-table__cell">{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}

@@ -1,0 +1,84 @@
+.index-header {
+    width: 100%;
+    color: white;
+    background-color: govuk-colour("blue");;
+    height: 140px;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.index-heading {
+    margin-top: 0;
+}
+
+.flex-wrapper-main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    font-size: 110%;
+    width: 1024px;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.index-header-wrapper {
+    max-width: 1024px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.two-thirds-wrapper {
+    width: 66.6%;
+}
+
+.one-third-wrapper {
+    width: 33.3%;
+}
+
+.version-wrapper {
+    border-bottom: 1px solid rgba(188, 188, 188, 1);
+    padding-left: .5rem;
+}
+
+.version-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-bottom: .25rem;
+}
+
+.version-info-child {
+    width: 50%;
+}
+
+.version-info-heading {
+    margin-bottom: 0rem;
+    font-weight: normal;
+}
+
+.version-info-desription {
+    margin-top: .5rem;
+    font-size: 120%;
+}
+
+.govuk-button--start {
+    background-image: url('/images/icon-pointer-2x.png');
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+
+    .flex-wrapper-main {
+        flex-wrap: wrap;
+    }
+
+    .two-thirds-wrapper,
+    .one-third-wrapper,
+    .version-wrapper {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,340 @@
+{% extends "nunjucks/layouts/main.njk" %}
+{% import "nunjucks/macros/inputs.njk" as inputs %}
+{% import "nunjucks/macros/buttons.njk" as buttons %}
+{% import "nunjucks/macros/typography.njk" as typography %}
+
+{% block pageTitle %}Login{% endblock %}
+
+{% block content %}
+
+<div class="v1-main-wrapper">
+
+    {% include "nunjucks/partials/v1/sidebar.njk" %}
+
+    <div class="v1-main-section">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="v1-record-wrapper">
+                    <div class="v1-claimant-details">
+                        <h2 class="v1-claimant-details-text">Claimant details:
+                            <span class="v1-claimant-details-nino">{{ record.nino }}</span>
+                            <br>
+                            {% if caseType === 'carers' %}
+                            <span class="v1-claimant-details-task">CHECK CARERS ELEMENT</span>
+                            {% elif caseType === 'notify' %}
+                            <span class="v1-claimant-details-task">NOTIFY CLAIMANT</span>
+                            {% elif caseType === 'payment' %}
+                            <span class="v1-claimant-details-task">RAISE PAYMENT</span>
+                            {% elif caseType === 'eligibility' %}
+                            <span class="v1-claimant-details-task">CHECK ELIGIBILITY</span>
+                            {% elif caseType === 'authorise' %}
+                            <span class="v1-claimant-details-task">AUTHORISE PAYMENT</span>
+                            {% else %}
+                            <span class="v1-claimant-details-task">UNKNOWN CASETYPE</span>
+                            {% endif %}
+                        </h2>
+                        <h2></h2>
+
+                        <div class="v1-record-wrapper-internal">
+                            <ul class="v1-tabs">
+                                <li class="v1-tab"><a class="v1-tab-link" data-target="personal">Personal details</a></li>
+                                <li class="v1-tab"><a class="v1-tab-link v1-active-tab" data-target="current">Current Task</a></li>
+                                <li class="v1-tab"><a class="v1-tab-link" data-target="decision">Decision History</a></li>
+                            </ul>
+
+                            <div id="personal" class="v1-record-tab-wrapper js-hidden">
+                                {{ typography.heading('Personal details', '2', 'm')}}
+
+                                <table class="govuk-table">
+                                  <tbody class="govuk-table__body">
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Claimant ID:</th>
+                                        <td class="govuk-table__cell">{{ record.id }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Claimant NINO:</th>
+                                        <td class="govuk-table__cell">{{ record.nino }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Firstname:</th>
+                                        <td class="govuk-table__cell">{{ record.firstName }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Lastname:</th>
+                                        <td class="govuk-table__cell">{{ record.lastName }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Address One:</th>
+                                        <td class="govuk-table__cell">{{ record.addressOne }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Address Two:</th>
+                                        <td class="govuk-table__cell">{{ record.addressTwo }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Address Three:</th>
+                                        <td class="govuk-table__cell">{{ record.addressThree }}</td>
+                                    </tr>
+                                    <tr class="govuk-table__row">
+                                        <th class="govuk-table__header" scope="col">Postcode:</th>
+                                        <td class="govuk-table__cell">{{ record.postcode }}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+
+                            <div class="v1-record-tab-wrapper" id="current">
+
+                                {% if caseType === 'carers' %}
+
+                                {{ typography.heading('Check Carers Element', '2', 'm')}}
+                                <div class="v1-two-thirds">
+                                    {{ typography.paragraph('You must contact the claimant and ask if they currently have a carer who gets the Carer\'s Element of Carer\'s Allowance.', 'v1-two-thirds')}}
+                                </div>
+
+                                <ul class="v1-task-list">
+                                    <li>
+                                        <p class="v1-task-p">Find the claimant in UCFS and use Use their preferred telephone number and ask if they have a carer who gets the Carer's Element of Carer's Allowance.</p>
+                                    </li>
+                                    <li>
+                                        <p></p>
+                                    </li>
+                                    <li>
+                                        {{ inputs.radio('hasSpoken', 'Did you speak to the claimant?', [
+                                            {value: true, label: 'Yes', target: 'hasCarersLi'},
+                                            {value: false, label: 'No', target: 'numberUsedLi'}
+                                        ], true)}}
+                                    </li>
+
+                                    <li id="numberUsedLi" class="js-hidden">
+                                        {{ inputs.text('numberUsed', 'Telephone number used', '', '50', true)}}
+                                    </li>
+
+                                    <li id="hasCarersLi" class="js-hidden">
+                                        {{ inputs.radio('hasCarers', 'Does the claimant have a carer who gets Carer\'s Element?', [
+                                            {value: true, label: 'Yes'},
+                                            {value: false, label: 'No', target: 'supportingEvidenceLi'}
+                                        ], true)}}
+                                    </li>
+                                    <li id="supportingEvidenceLi" class="js-hidden">
+                                        {{ inputs.checkbox('supportingEvidence', 'What is the supporting evidence?', [
+                                            {value: 'itemOne', label: 'Item One'},
+                                            {value: 'itemOne', label: 'Item One'},
+                                            {value: 'itemOne', label: 'Item One'}
+                                        ], '', 'Select all that apply') }}
+                                    </li>
+                                    <li>
+                                        {{ inputs.submit('Submit') }}
+                                    </li>
+                                </ul>
+
+                            {% elif caseType === 'notify' %}
+
+                            {{ typography.heading('Tell the claimant about a payment', '2', 'm')}}
+                            <div class="v1-two-thirds">
+                                {{ typography.paragraph('You need to create a letter to notify the claimant we\'ve paid them a single amount of SDP, and upload it to their journal.', 'v1-two-thirds')}}
+                            </div>
+
+                            {{ inputs.text('notifyName', 'Claimants full name on UC', '', '50', true, 'related-input') }}
+                            {{ inputs.text('notifyAddressOne', 'Address line one', '', '30', true, 'related-input') }}
+                            {{ inputs.text('notifyAddressTwo', 'Address line two', '', '30', true, 'related-input') }}
+                            {{ inputs.text('notifyAddressThree', 'Address line three', '', '30', true, 'related-input') }}
+                            {{ inputs.text('notifyAddressFour', 'Address line four', '', '30', true, 'related-input') }}
+                            {{ inputs.text('notifyPostcode', 'Postcode', '', '10', true) }}
+
+                            {{ inputs.submit('Generate letter') }}
+
+                            {% elif caseType === 'payment' %}
+
+                            {{ typography.heading('Raise a payment', '2', 'm')}}
+
+                            <div class="v1-two-thirds">
+                                {{ typography.paragraph('The claimant is eligible for SDP payments.', 'v1-two-thirds')}}
+                            </div>
+
+                            <div class="v1-two-thirds">
+                                {{ typography.paragraph('A single payment amount has been calculated, but you need to raise a payment in CPS.', 'v1-two-thirds')}}
+
+                            {{ typography.heading('Single payment calculation', '2', 'm')}}
+
+
+                            <table class="govuk-table">
+                              <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                  <th class="govuk-table__header" scope="col">SDP rate</th>
+                                  <th class="govuk-table__header govuk-table__header--numeric" scope="col">First UC claim date</th>
+                                  <th class="govuk-table__header govuk-table__header--numeric" scope="col">APs since first UC claim date</th>
+                                </tr>
+                              </thead>
+                              <tbody class="govuk-table__body">
+                                <tr class="govuk-table__row">
+                                  <th class="govuk-table__header" scope="row">£80</th>
+                                  <td class="govuk-table__cell govuk-table__cell--numeric">1 August 2016</td>
+                                  <td class="govuk-table__cell govuk-table__cell--numeric">27</td>
+                                </tr>
+                              </tbody>
+                            </table>
+
+                            {{ typography.heading('£2,160', '3', 'l related-input')}}
+                            <p>Total single payment due</p>
+
+                            {{ typography.heading('Raise a single payment in CPS', '3', 'l')}}
+                            <p>Request a single SDP payment of £2,160, you'll need the:</p>
+                            <ul>
+                                <li>claimant's bank details from ???</li>
+                                <li>name of your CPS authoriser</li>
+                            </ul>
+                            {{ inputs.submit('Record payment request')}}
+
+                        </div>
+
+                        {% elif caseType === 'eligibility' %}
+
+                        {{ typography.heading('Check monthly payment eligibility', '2', 'm')}}
+
+                        <div class="v1-two-thirds">
+                            {{ typography.paragraph('You need to make some checks for the claimant\'s eligibility and the rate they\'d get.', 'v1-two-thirds')}}
+                        </div>
+
+                        {{ inputs.radio('gettingUc', 'Is the claimant getting Universal Credit payments?', [
+                            {value: true, label: 'Yes', target: 'coupleStatus'},
+                            {value: false, label: 'No'}
+                        ], true)}}
+
+                        <div id="coupleStatus" class="js-hidden">
+                            {{ inputs.radio('coupleStatusChanged', 'Has the claimant\'s couple status changed?', [
+                                {value: true, label: 'Yes'},
+                                {value: false, label: 'No', target: 'inGroup'}
+                            ], true)}}
+                        </div>
+
+                        <div id="inGroup" class="js-hidden">
+                            {{ inputs.radio('groupType', 'Which Universal Credit work group is the claimant in?', [
+                                {value: 'intensiveWork', label: 'Intensive work search'},
+                                {value: 'lightTouchWork', label: 'Light touch - in work'},
+                                {value: 'lightTouchNoWork', label: 'Light touch - out of work'},
+                                {value: 'workPrep', label: 'Work preparation'},
+                                {value: 'wfi', label: 'Work focused interview'},
+                                {value: 'workEnough', label: 'Working enough - no work related requirements'},
+                                {value: 'noWork', label: 'No work related requirements'}
+                            ])}}
+                        </div>
+
+                        {{ inputs.submit('Check Eligibility') }}
+
+                        {% elif caseType === 'authorise' %}
+
+                        {{ typography.heading('Authorise a single payment', '2', 'm')}}
+
+                        <div class="v1-two-thirds">
+                            {{ typography.paragraph('You need to check the single payment details and authorise it in CPS.', 'v1-two-thirds')}}
+                        </div>
+
+                        <table class="govuk-table">
+                          <tbody class="govuk-table__body">
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Getting UC payments:</th>
+                                <td class="govuk-table__cell">Yes</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Couple status changed:</th>
+                                <td class="govuk-table__cell">No</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Group:</th>
+                                <td class="govuk-table__cell">No work related requirements</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">APs since first UC claim date:</th>
+                                <td class="govuk-table__cell">27</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">SDP rate:</th>
+                                <td class="govuk-table__cell">£80</td>
+                            </tr>
+                            <tr class="govuk-table__row">
+                                <th class="govuk-table__header" scope="col">Single payment amount:</th>
+                                <td class="govuk-table__cell">£2,160</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        {{ inputs.radio('doesAuthorise', 'Do you authorise the payment?', [
+                            {value: true, label: 'Yes', target: 'whyDid'},
+                            {value: false, label: 'No', target: 'whyNot'}
+                        ], true)}}
+
+                        <div id="whyDid" class="js-hidden">
+                            {{ inputs.text('paymentRef', 'Enter the payment reference number from CPS', '', '50', true) }}
+                        </div>
+
+                        <div id="whyNot" class="js-hidden">
+                            {{ inputs.checkbox('reasonNot', 'Why did you not authorise this payment?', [
+                                {value: 'rateWrong', label: 'Rate wrong'},
+                                {value: 'singleWrong', label: 'Single payment amount wrong'},
+                                {value: 'authWrong', label: 'Authoriser wrong'}
+                            ], '', 'Select all that apply') }}
+                        </div>
+
+                        {{ inputs.submit('Submit') }}
+
+
+
+
+
+                            {% else %}
+                                <p>Unknown casetype</p>
+                            {% endif %}
+
+                        </div>
+
+
+                            <div id="decision" class="v1-record-tab-wrapper js-hidden">
+                                {{ typography.heading('Decision History', '2', 'm')}}
+                                <div class="v1-decision-section">
+                                    <p class="v1-greyed-date">1 September 2018</p>
+                                    <p class="v1-decision-type">Inital checks</p>
+
+                                    <table class="govuk-table">
+                                      <tbody class="govuk-table__body">
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">Couple status:</th>
+                                            <td class="govuk-table__cell">Single</td>
+                                        </tr>
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">SDP:</th>
+                                            <td class="govuk-table__cell">Yes</td>
+                                        </tr>
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">PIP (standard living):</th>
+                                            <td class="govuk-table__cell">Yes</td>
+                                        </tr>
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">AFIP:</th>
+                                            <td class="govuk-table__cell">No</td>
+                                        </tr>
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">DLA (middle or higher):</th>
+                                            <td class="govuk-table__cell">Yes</td>
+                                        </tr>
+                                        <tr class="govuk-table__row">
+                                            <th class="govuk-table__header" scope="col">AA or CAA paid with IIDB or WP:</th>
+                                            <td class="govuk-table__cell">Yes</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

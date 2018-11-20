@@ -1,0 +1,29 @@
+{% extends "nunjucks/layouts/main.njk" %}
+{% import "nunjucks/macros/inputs.njk" as inputs %}
+{% import "nunjucks/macros/buttons.njk" as buttons %}
+{% import "nunjucks/macros/typography.njk" as typography %}
+
+{% block pageTitle %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="v1-main-wrapper">
+
+    {% include "nunjucks/partials/v1/sidebar.njk" %}
+
+    <div class="v1-main-section">
+        <div class="v1-dashboard-row">
+            {{ buttons.v1DashboardButton('Confirm Carers', counts.carers, 'carers') }}
+            {{ buttons.v1DashboardButton('Notify Claimant', counts.notify, 'notify') }}
+            {{ buttons.v1DashboardButton('Raise Payment', counts.payment, 'payment') }}
+        </div>
+        <div class="v1-dashboard-row">
+            {{ buttons.v1DashboardButton('Check Eligibility', counts.eligibility, 'eligibility') }}
+            {{ buttons.v1DashboardButton('Authorise Payment', counts.authorise, 'authorise') }}
+            {{ buttons.v1DashboardButton('All cases', counts.other, 'other') }}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

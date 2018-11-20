@@ -1,0 +1,34 @@
+{% extends "nunjucks/layouts/main.njk" %}
+{% import "nunjucks/macros/inputs.njk" as inputs %}
+{% import "nunjucks/macros/buttons.njk" as buttons %}
+{% import "nunjucks/macros/typography.njk" as typography %}
+
+{% block pageTitle %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="v2-main-wrapper">
+
+    {% include "nunjucks/partials/v3/topbar.njk" %}
+
+
+
+    <div class="v3-main-section">
+        <div class="v3-dashboard-row">
+            {{ buttons.v3DashboardButton('Confirm Carers', counts.carers, 'carers') }}
+            {{ buttons.v3DashboardButton('Notify Claimant', counts.notify, 'notify') }}
+            {{ buttons.v3DashboardButton('Raise Payment', counts.payment, 'payment') }}
+        </div>
+        <div class="v3-dashboard-row">
+            {{ buttons.v3DashboardButton('Check Eligibility', counts.eligibility, 'eligibility') }}
+            {{ buttons.v3DashboardButton('Authorise Payment', counts.authorise, 'authorise') }}
+            {{ buttons.v3DashboardButton('All cases', counts.other, 'other') }}
+        </div>
+        <div class="v3-add-margin">
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

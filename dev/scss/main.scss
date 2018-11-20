@@ -1,0 +1,107 @@
+@import 'node_modules/govuk-frontend/all';
+
+*,
+*::before,
+*::after {
+    font-family: Arial !important;  // Quickest way to overwrite nta use throughout frontend scss files
+    box-sizing: border-box; // Needs to be done properly for real style files
+}
+
+.govuk-footer__copyright-logo {
+    background-image: url('/images/govuk-crest-2x.png');
+}
+
+.padded-header {
+    padding-left: 1rem;
+    width: 100%;
+}
+
+a.govuk-header__link,
+a.govuk-header__link--homepage {
+     width: 600px;
+     font-size: 130%;
+ }
+
+ .input-50 {
+     width: 50%;
+ }
+
+ .input-40 {
+     width: 40%;
+ }
+
+ .input-30 {
+     width: 30%;
+ }
+
+ .input-20 {
+     width: 20%;
+ }
+
+ .input-10 {
+     width: 10%;
+ }
+
+ .input-100 {
+     width: 100%;
+ }
+
+ .bold-label {
+     font-weight: bold;
+ }
+
+ .related-input {
+     margin-bottom: -0.5rem;
+ }
+
+ .sdp-logout {
+     float: right;
+     color: #fff;
+     padding-top: .25rem;
+     padding-right: 2rem;
+ }
+
+ .sdp-logout-link,
+ .sdp-logout-link:visited {
+     color: #fff;
+     font-weight: bold;
+     text-decoration: none;
+     font-size: 110%;
+ }
+
+ .sdp-logout-link:hover {
+     color: rgba(0, 94, 165, 1);
+ }
+
+ .js-hidden {
+     display: none;
+     visibility: hidden;
+ }
+
+ .inline {
+     display: inline;
+ }
+
+ .left {
+     float: left;
+ }
+
+ .right {
+     float: right;
+ }
+
+ .clearfix {
+     clear: both;
+     display: block;
+ }
+
+ @media screen and (max-width: 600px) {
+     .input-50 {
+         width: 100%;
+     }
+ }
+
+@import 'index';
+@import 'version1';
+@import 'version2';
+@import 'version3';

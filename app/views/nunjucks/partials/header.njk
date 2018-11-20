@@ -1,0 +1,21 @@
+<header class="govuk-header" role="banner" data-module="header"
+        {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+  <div class="govuk-header__container">
+
+    <div class="govuk-header__logo">
+      <a href="/" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <span class="govuk-header__logotype-text padded-header">
+            Severe Disability Premium Tracker
+          </span>
+        </span>
+      </a>
+    </div>
+    {% if userId %}
+    <span class="sdp-logout">
+        {{ userId }}:
+        <a class="sdp-logout-link" href="/">Logout</a>
+    </span>
+    {% endif %}
+  </div>
+</header>

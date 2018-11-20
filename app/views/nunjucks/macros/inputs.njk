@@ -1,0 +1,83 @@
+{% macro hidden(name, value) %}
+    <input type="hidden" name="{{ name }}" value="{{ value }}">
+{% endmacro %}
+
+{% macro select(id, label, options, value, size, bold) %}
+<div class="govuk-form-group">
+    <label class="govuk-label {% if bold %}bold-label{% endif %}" for="sort">
+        {{ label }}
+    </label>
+    <select name="{{ id }}" class="govuk-select {% if size %}input-{{ size }}{% endif %}" id="{{ id }}">
+    {% for option in options %}
+        <option class="" value="{{ option.value }}" {% if value === option.value %}selected{% endif %}>{{ option.label }}</option>
+    {% endfor %}
+    </select>
+</div>
+{% endmacro %}
+
+{% macro text(id, label, value, size, bold, additionalClass, inline) %}
+<div class="govuk-form-group {% if inline %}inline{% endif %}">
+    <label class="govuk-label {% if bold %}bold-label{% endif %} {% if inline %}inline{% endif %}" for="{{ id }}">
+        {{ label }}
+    </label>
+    <input class="govuk-input {% if size %}input-{{ size }}{% endif %} {% if additionalClass%}{{ additionalClass }}{% endif %} {% if inline %}inline{% endif %}" id="{{ id }}" name="{{ id }}" type="text" value="{{ value }}">
+</div>
+{% endmacro %}
+
+{% macro password(id, label, value, size, bold) %}
+<div class="govuk-form-group">
+    <label class="govuk-label {% if bold %}bold-label{% endif %}" for="{{ id }}">
+        {{ label }}
+    </label>
+    <input class="govuk-input {% if size %}input-{{ size }}{% endif %}" id="{{ id }}" name="{{ id }}" type="password" value="{{ value }}">
+</div>
+{% endmacro %}
+
+{% macro checkbox(id, label, checkboxes, value, hint) %}
+<div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+            {{ label }}
+        </legend>
+        {% if hint %}
+            <span class="govuk-hint">
+                {{ hint }}
+            </span>
+        {% endif %}
+        <div class="govuk-checkboxes">
+        {% for box in checkboxes %}
+            <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" id="{{ id }}-{{ loop.index }}" name="{{ id }}-{{ loop.index }}" type="checkbox" value="{{ box.value }}" {% if value === box.value %}checked{% endif %}>
+                <label class="govuk-label govuk-checkboxes__label" for="{{ id }}-{{ loop.index }}">
+                    {{ box.label }}
+                </label>
+            </div>
+        {% endfor %}
+        </div>
+    </fieldset>
+</div>
+{% endmacro %}
+
+{% macro radio(id, label, radios, inline) %}
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="changed-name-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+        {{ label }}
+    </legend>
+    <div {% if inline %}class="govuk-radios govuk-radios--inline"{% else %}class="govuk-radios govuk-radios"{% endif %}>
+        {% for radio in radios %}
+        <div class="govuk-radios__item">
+          <input class="govuk-radios__input" id="{{ id }}-{{ loop.index }}" name="{{ id }}" type="radio" value="{{ radio.value }}" {% if radio.target %}data-target="{{ radio.target }}"{% endif %}>
+          <label class="govuk-label govuk-radios__label" for="{{ id }}-{{ loop.index }}">
+              {{ radio.label }}
+          </label>
+        </div>
+        {% endfor %}
+    </div>
+  </fieldset>
+</div>
+{% endmacro %}
+
+{% macro submit(value, inline) %}
+    <input type="submit" class="govuk-button {% if inline %}inline{% endif %}" name="" value="{{ value | default('Submit') }}">
+{% endmacro %}

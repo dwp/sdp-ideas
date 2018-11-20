@@ -1,0 +1,58 @@
+.v2-main-section {
+    width: 100%;
+    min-height: 700px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: no-wrap;
+}
+
+.v3-dashboard-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 40vh;
+    margin-bottom: .5rem;
+}
+
+.v3-dashboard-button-wrapper {
+    width: 33.5%;
+    height: 100%;
+    border: 1px solid grey;
+    margin: .5rem;
+}
+
+.v3-dashboard-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: rgba(222, 222, 222, 1);
+    box-shadow: 3px 3px 3px #000;
+}
+
+.v3-dashboard-button:active {
+    box-shadow: 1px 1px 1px #000;
+}
+
+.v3-dashboard-button:hover {
+    background-color: lighten(rgba(222, 222, 222, 1), 8%);
+}
+
+ .v3-dashboard-button-amount {
+     color: rgba(0, 94, 165, 1);
+     font-size: 5rem;
+     margin-bottom: 1rem;
+     margin-top: 1rem;
+ }
+
+ .v3-dashboard-button-description {
+     color: #000;
+ }
+
+ .v3-add-margin {
+     margin-bottom: 2rem;
+ }

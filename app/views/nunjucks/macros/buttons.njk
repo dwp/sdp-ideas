@@ -1,0 +1,17 @@
+{% macro v1DashboardButton(description, amount, listType) %}
+    <div class="v1-dashboard-button-wrapper">
+        <a class="v1-dashboard-button" href="/version-1/listview?listType={{ listType }}">
+            <h2 class="v1-dashboard-button-amount">{{ amount }}</h2>
+            <h3 class="v1-dashboard-button-description">{{ description }}</h3>
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro v3DashboardButton(description, amount, recordType) %}
+    <div class="v3-dashboard-button-wrapper">
+        <a class="v3-dashboard-button" href="/version-3/record?recordType={{ recordType }}">
+            <h2 class="v3-dashboard-button-amount">{{ amount }}</h2>
+            <h3 class="v3-dashboard-button-description">{{ description }}</h3>
+        </a>
+    </div>
+{% endmacro %}

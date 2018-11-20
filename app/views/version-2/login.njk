@@ -1,0 +1,45 @@
+{% extends "nunjucks/layouts/main.njk" %}
+{% import "nunjucks/macros/inputs.njk" as inputs %}
+
+{% block pageTitle %}Login{% endblock %}
+
+{% block content %}
+
+<div class="govuk-width-container">
+  <main class="govuk-main-wrapper">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+          <form class="" action="/version-2/login" method="post">
+
+              {% if errors %}
+                  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="error-summary">
+                    <h2 class="govuk-error-summary__title" id="error-summary-title">
+                      I'm afraid I can't do that Dave.
+                    </h2>
+                    <div class="govuk-error-summary__body">
+                      <ul class="govuk-list govuk-error-summary__list">
+                        <li>
+                          <a href="#email">Email could be wrong</a>
+                        </li>
+                        <li>
+                            <a href="#password">Password could be wrong</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+              {% endif %}
+
+
+              <h1 class="govuk-heading-xl">Login</h1>
+              {{ inputs.text('email', 'Email address', '', '50', true) }}
+              {{ inputs.password('password', 'Password', '', '50', true) }}
+              {{ inputs.submit('Login')}}
+          </form>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+{% endblock %}

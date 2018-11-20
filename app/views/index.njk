@@ -1,0 +1,99 @@
+{% extends "nunjucks/layouts/main.njk" %}
+
+{% block pageTitle %}Login{% endblock %}
+
+{% block content %}
+
+<div class="index-header">
+    <div class="index-header-wrapper">
+        <h1 class="index-heading">Severe Disability Premium Tracker</h1>
+        <h2>Design Ideas</h2>
+    </div>
+</div>
+
+<div class="flex-wrapper-main">
+    <div class="two-thirds-wrapper">
+        <div class="centered-form-wrapper">
+            <div class="">
+
+                <div class="version-wrapper">
+                    <div class="version-info">
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Version name</h3>
+                            <h4 class="version-info-desription">TMS Style</h4>
+                        </div>
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Creation date</h3>
+                            <h4 class="version-info-desription">17 November 2018</h4>
+                        </div>
+                    </div>
+
+                    <a href="/version-1/login" role="button" draggable="false" class="govuk-button govuk-button--start">
+                        Start now
+                    </a>
+                    <p>A version taken from the existing TMS design. Search functionality and quicklinks are available from the sidebar in all views</p>
+
+                        <p>The design assumes that cases are assigned either manually, or automatically to a user</p>
+
+                        <p>Design consists of three pages: An initial dashboard page where a link to each case type is provided as well as a count of
+                         each type of case that belongs to a user. The second page is a list view, which displays the types of cases selected from the links on either the dashboard or the quicklinks in the sidebard. The third page
+                     is the record page which would contain all details required for the current action - programatically generated based on the case type.</p>
+
+                     <p>The use of show / hide is utilised to present only the necessary information, with further options becoming available based on the choices made, without having to use multiple pages.</p>
+                </div>
+
+                <div class="version-wrapper">
+                    <div class="version-info">
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Version name</h3>
+                            <h4 class="version-info-desription">Reduced Layout</h4>
+                        </div>
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Creation date</h3>
+                            <h4 class="version-info-desription">19 November 2018</h4>
+                        </div>
+                    </div>
+
+                    <a href="/version-2/login" role="button" draggable="false" class="govuk-button govuk-button--start">
+                        Start now
+                    </a>
+                    <p>This version reduces the number of pages to an absolute minumum of 2. A list view and a record view. The record view could probably do with a 50/50 width layout with two columns</p>
+
+                    <p>Simple search functionality is presented in the form of a top bar containing search by NINO and search by name. This design would need a better way of returning to a specific list as returning to the all list would not always be appropriate</p>
+                </div>
+
+                <div class="version-wrapper">
+                    <div class="version-info">
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Version name</h3>
+                            <h4 class="version-info-desription">No lists</h4>
+                        </div>
+                        <div class="version-info-child">
+                            <h3 class="version-info-heading">Creation date</h3>
+                            <h4 class="version-info-desription">19 November 2018</h4>
+                        </div>
+                    </div>
+
+                    <a href="/version-3/login" role="button" draggable="false" class="govuk-button govuk-button--start">
+                        Start now
+                    </a>
+                    <p>This version also reduces the number of pages to 2. However, instead of skipping the lists, it insead skips the dashboard. The record page presents options for returning to dashboard or moving to the next case</p>
+
+                    <p>I've again included the topbar design for searching as I ran out of time and couldn't think of a third one :(</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="one-third-wrapper">
+
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

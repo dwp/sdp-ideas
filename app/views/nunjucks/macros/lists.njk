@@ -1,0 +1,7 @@
+{% macro accountHistoryList(items) %}
+    <ol class="govuk-list timeline-list">
+        {% for item in items %}
+            <li class="timeline-entry"><span class="timeline-description">{{ item.description }}</span><span class="timeline-date">{{ item.date }}</span></li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

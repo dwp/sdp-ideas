@@ -1,0 +1,19 @@
+<div class="v1-sidebar">
+    <div class="v1-sidebar-search">
+        <form class="" action="/v1-sidebar-search" method="post">
+            {{ inputs.text('searchNino', 'Search by NINO', '', '100', false, 'related-input') }}
+            {{ inputs.text('searchName', 'Search by Name', '', '100', false) }}
+            <input type="submit" class="js-hidden" name="" value="submit">
+        </form>
+    </div>
+    <div class="v1-sidebar-quicklinks">
+        <a class="v1-sidebar-link {% if activeView === 'dashboard' %}v1-active-view{% endif %}" href="/version-1/dashboard">Dashboard</a>
+        <a class="v1-sidebar-link {% if listType === 'carers' %}v1-active-view{% endif %}" href="/version-1/listview?listType=carers">Confirm carers</a>
+        <a class="v1-sidebar-link {% if listType === 'notify' %}v1-active-view{% endif %}" href="/version-1/listview?listType=notify">Notify claimant</a>
+        <a class="v1-sidebar-link {% if listType === 'payment' %}v1-active-view{% endif %}" href="/version-1/listview?listType=payment">Raise payment</a>
+        <a class="v1-sidebar-link {% if listType === 'eligibility' %}v1-active-view{% endif %}" href="/version-1/listview?listType=eligibility">Check eligibility</a>
+        <a class="v1-sidebar-link {% if listType === 'authorise' %}v1-active-view{% endif %}" href="/version-1/listview?listType=authorise">Authorise payment</a>
+        <a class="v1-sidebar-link {% if listType === 'other' %}v1-active-view{% endif %}" href="/version-1/listview?listType=other">All cases</a>
+
+    </div>
+</div>

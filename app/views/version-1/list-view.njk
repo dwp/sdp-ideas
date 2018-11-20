@@ -1,0 +1,53 @@
+{% extends "nunjucks/layouts/main.njk" %}
+{% import "nunjucks/macros/inputs.njk" as inputs %}
+{% import "nunjucks/macros/buttons.njk" as buttons %}
+{% import "nunjucks/macros/typography.njk" as typography %}
+
+{% block pageTitle %}List view{% endblock %}
+
+{% block content %}
+
+<div class="v1-main-wrapper">
+
+    {% include "nunjucks/partials/v1/sidebar.njk" %}
+
+    <div class="v1-main-section">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+                <div class="v1-internal-wrapper">
+                    {% if records.length === 0 %}
+                        {{ typography.heading('No results', '1', 'xl reduced-margin-heading') }}
+                        {{ typography.lede('No records found with that criteria') }}
+                        <a href="/version-1/dashboard" type="link" class="govuk-button">
+                            Return to dashboard
+                        </a>
+                    {% else %}
+                    <table class="govuk-table list-view-table">
+                        <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                          <th class="govuk-table__header" scope="col">Nino</th>
+                          <th class="govuk-table__header" scope="col">First name</th>
+                          <th class="govuk-table__header" scope="col">Last name</th>
+                          <th class="govuk-table__header" scope="col">Claimant ID</th>
+                        </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            {% for record in records %}
+                                <tr class="govuk-table__row v1-list-row">
+                                  <td class="govuk-table__cell">{{ record.nino }}</td>
+                                  <td class="govuk-table__cell">{{ record.firstName }}</td>
+                                  <td class="govuk-table__cell">{{ record.lastName }}</td>
+                                  <td class="govuk-table__cell select-case-td"><a class="v1-list-link" href="/version-1/record/{{ record.id }}">{{ record.id }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
